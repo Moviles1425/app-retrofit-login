@@ -1,6 +1,7 @@
 package pe.edu.idat.app_retrofit_login.retrofit
 
 import okhttp3.OkHttpClient
+import pe.edu.idat.app_retrofit_login.retrofit.api.PatitasService
 import pe.edu.idat.app_retrofit_login.util.Constantes
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,7 +21,7 @@ object ClienteRetrofit {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     //Enlazando el objeto retrofit con los recursos de la API Rest
-    /*val retrofitPersonajeServicio : ApiPersonajeService by lazy {
-        buildRetrofit().create(ApiPersonajeService::class.java)
-    }*/
+    val retrofitPatitasServicio : PatitasService by lazy {
+        buildRetrofit().create(PatitasService::class.java)
+    }
 }
