@@ -49,6 +49,8 @@ dependencies {
     //Glide
     implementation("com.github.bumptech.glide:glide:5.0.5")
     annotationProcessor("com.github.bumptech.glide:compiler:5.0.5")
+    //Lottie
+    implementation("com.airbnb.android:lottie:5.2.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
