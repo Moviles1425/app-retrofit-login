@@ -3,4 +3,5 @@
     <string name="textusuario">Usuario</string>
     <string name="textpassword">Password</string>
     <string name="textingresar">Ingresar</string>
+    <string name="textcerrar">Cerrar Sesión</string>
 </resources>
