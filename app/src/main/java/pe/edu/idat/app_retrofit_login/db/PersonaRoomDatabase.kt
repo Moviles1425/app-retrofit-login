@@ -10,7 +10,7 @@ import pe.edu.idat.app_retrofit_login.db.entity.PersonaEntity
 @Database(entities = [PersonaEntity::class], version = 1)
 abstract class PersonaRoomDatabase : RoomDatabase() {
 
-    abstract fun PersonaDao() : PersonaDao
+    abstract fun personaDao() : PersonaDao
 
    companion object{
        @Volatile

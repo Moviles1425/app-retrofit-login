@@ -10,6 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import pe.edu.idat.app_retrofit_login.R
 import pe.edu.idat.app_retrofit_login.databinding.ActivityMainBinding
+import pe.edu.idat.app_retrofit_login.db.PersonaRoomDatabase
+import pe.edu.idat.app_retrofit_login.db.entity.PersonaEntity
 import pe.edu.idat.app_retrofit_login.retrofit.ClienteRetrofit
 import pe.edu.idat.app_retrofit_login.retrofit.request.LoginRequest
 import pe.edu.idat.app_retrofit_login.retrofit.response.LoginResponse
@@ -59,7 +61,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 ) {
                     val loginResponse = response.body()!!
                     if(loginResponse.rpta){
-                        startActivity(Intent(applicationContext, HomeActivity::class.java))
+                        val persona = PersonaEntity(
+                            id = loginResponse.idpersona.toInt(),
+                            nombres = loginResponse.nombres,
+                            apellidos = loginResponse.apellidos,
+                            email = loginResponse.email,
+                            celular = loginResponse.celular,
+                            usuario = loginResponse.usuario)
+                        //Cada vez que ejecutamos instrucciones DML (Insert, update, delete)
+                        Thread{
+                            val db = PersonaRoomDatabase.getDatabase(applicationContext)
+                            db.personaDao().eliminarTodo()
+                            db.personaDao().insertar(persona)
+                            runOnUiThread {
+                                startActivity(Intent(applicationContext, HomeActivity::class.java))
+                                finish()
+                            }
+                        }.start()
                     }else{
                         AppMensaje.mensajeSnackBar(binding.root,
                             loginResponse.mensaje, TipoMensaje.ERROR)
